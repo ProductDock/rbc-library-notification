@@ -7,7 +7,7 @@
 Production is running in GCP.
 
 1. #### Follow [usual steps](https://cloud.google.com/compute/docs/instances/connecting-to-instance) for connecting to a VM running in GCP
-   Connect via SSH to a **rbc-library-notification-vm**.
+   Connect via SSH to a **rbc-library-vm**.
 2. #### Go to a folder where backend is:
    ```
    cd /home/pd-library/rbc-library-notification
@@ -25,12 +25,12 @@ Production is running in GCP.
 
    ```
    sudo su
-   ../apache-maven-3.8.5/bin/mvn package -P prod
+   ../apache-maven-3.8.5/bin/mvn package
    ```
 
-5. #### Restart rbc-library-notification-vm to run a new jar
+5. #### Restart rbc-library-vm to run a new jar
 
-   **rbc-library-notification-vm** is configured with startup-script. Startup script already contains instructions for running the jar:
+   **rbc-library-vm** is configured with startup-script. Startup script already contains instructions for running the jar:
 
    **Startup-script content:**
 

@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+slack:
+  oauth:
+    token: xoxb-1571320408691-3350497591842-bCeBKMtJwCNEp8cFacm1p1uZ
+
+spring:
+  kafka:
+    enabled: true
+    bootstrap-servers: ${kafka.server.url:localhost:9092}
+    value-seriliazer: org.apache.kafka.common.serialization.StringSerializer
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      enable-auto-commit: true #necessary setting
+      auto-offset-reset: latest
+      group-id: ${consumer.group:group}
+#    listener:
+#      ack-mode: manual-immediate
+    topic:
+      notifications-topic: ${kafka.topic:notifications-topic}

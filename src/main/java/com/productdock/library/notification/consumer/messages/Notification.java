@@ -1,10 +1,10 @@
-package com.productdock.library.notification;
+package com.productdock.library.notification.consumer.messages;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor @NoArgsConstructor
-public class NotificationDTO {
+public class Notification {
 
     public String email;
     public String message;

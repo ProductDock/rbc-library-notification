@@ -1,5 +1,7 @@
 package com.productdock.library.notification;
 
+import com.productdock.library.notification.consumer.messages.Notification;
+import com.productdock.library.notification.slack.SlackNotificationSender;
 import com.slack.api.methods.SlackApiException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,12 +12,12 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("api/notify")
-public record NotifyApi(SlackNotification slackNotification) {
+public record NotificationApi(SlackNotificationSender slackNotification) {
 
     @PostMapping("/slack")
-    public void sendSlackNotification(@RequestBody NotificationDTO notificationDTO) {
+    public void sendSlackNotification(@RequestBody Notification notification) {
         try {
-            slackNotification.sendMessage(notificationDTO);
+            slackNotification.sendMessage(notification);
         } catch (SlackApiException e) {
             e.printStackTrace();
         } catch (IOException e) {

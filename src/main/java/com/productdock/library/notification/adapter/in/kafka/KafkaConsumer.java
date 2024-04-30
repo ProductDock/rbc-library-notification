@@ -11,6 +11,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.time.OffsetDateTime;
+
 @Component
 @Slf4j
 @AllArgsConstructor
@@ -24,8 +26,9 @@ public class KafkaConsumer {
     public synchronized void listenNotifications(ConsumerRecord<String, String> message) throws JsonProcessingException {
         log.debug("Received notification kafka message: {}", message);
 
-        var bookRentalStatusChanged = objectMapper.readValue(message.value(), NotificationMessage.class);
-        var notification = notificationMapper.toDomain(bookRentalStatusChanged);
+        var notificationMessage = objectMapper.readValue(message.value(), NotificationMessage.class);
+        var notification = notificationMapper.toDomain(notificationMessage);
+        notification.setCreatedDate(OffsetDateTime.now());
         addNotificationUseCase.saveNotification(notification);
     }
 }

@@ -10,5 +10,6 @@ public interface NotificationMapper {
 
     @Mapping(target = "read", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdDate", ignore = true)
     public Notification toDomain(NotificationMessage source);
 }

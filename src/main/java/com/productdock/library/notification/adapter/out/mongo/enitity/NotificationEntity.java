@@ -17,5 +17,6 @@ public class NotificationEntity {
     private String description;
     private String userId;
     private boolean read;
+    private String createdDate;
     private ActionEntity action;
 }

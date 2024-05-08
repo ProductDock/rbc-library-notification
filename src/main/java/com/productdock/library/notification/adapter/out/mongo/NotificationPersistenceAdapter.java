@@ -33,7 +33,9 @@ public class NotificationPersistenceAdapter implements NotificationPersistenceOu
 
     @Override
     public void save(Notification notification) {
-        notificationRepository.save(mapper.toEntity(notification));
+        log.info("Notification for saving: {}", notification);
+        var saved = notificationRepository.save(mapper.toEntity(notification));
+        log.info("Saved notification: {}", saved);
     }
 
     @Override

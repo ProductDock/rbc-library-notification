@@ -1,5 +1,6 @@
 package com.productdock.library.notification.adapter.out.mongo;
 
+import com.productdock.library.notification.adapter.out.mongo.enitity.NotificationEntity;
 import com.productdock.library.notification.adapter.out.mongo.mapper.NotificationEntityMapper;
 import com.productdock.library.notification.application.port.out.persistence.NotificationPersistenceOutPort;
 import com.productdock.library.notification.domain.Notification;
@@ -35,7 +36,8 @@ public class NotificationPersistenceAdapter implements NotificationPersistenceOu
     public void save(Notification notification) {
         log.info("Notification for saving: {}", notification);
         var saved = notificationRepository.save(mapper.toEntity(notification));
-        log.info("Saved notification: {}", saved);
+        List<NotificationEntity> savedNotification = notificationRepository.findAllByUserId(notification.getUserId());
+        log.info("Saved notification: {}", savedNotification);
     }
 
     @Override

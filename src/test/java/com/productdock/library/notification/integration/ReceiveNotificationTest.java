@@ -3,6 +3,7 @@ package com.productdock.library.notification.integration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.productdock.library.notification.adapter.in.kafka.messages.NotificationMessage;
 import com.productdock.library.notification.adapter.out.mongo.NotificationRepository;
+import com.productdock.library.notification.integration.kafka.KafkaTestBase;
 import com.productdock.library.notification.integration.kafka.KafkaTestProducer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @SpringBootTest
-public class ReceiveNotificationTest {
+public class ReceiveNotificationTest extends KafkaTestBase {
 
     public static final NotificationMessage NOTIFICATION_MESSAGE = notificationMessage();
     @Autowired

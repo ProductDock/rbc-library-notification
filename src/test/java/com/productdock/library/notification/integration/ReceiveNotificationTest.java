@@ -49,11 +49,13 @@ public class ReceiveNotificationTest extends KafkaTestBase {
                 .atMost(Duration.ofSeconds(20))
                 .until(() -> {
                     log.info("Fetching...");
-                    var savedNotification = notificationRepository.findAll();
+                    var savedNotification = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
                     log.info("Fetched notifications:{}", savedNotification);
                     return !savedNotification.isEmpty();
                 });
 
-        assertThat(notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId)).isNotEmpty();
+       log.warn("{}", notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId));
+       var notifications = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
+       assertThat(notifications).isNotEmpty();
     }
 }

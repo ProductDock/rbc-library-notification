@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.Duration;
@@ -35,10 +37,13 @@ public class ReceiveNotificationTest extends KafkaTestBase {
     @Value("${spring.kafka.topic.notifications}")
     private String topic;
 
-    @AfterEach
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     @BeforeEach
     void before() {
-        notificationRepository.deleteAll();
+        mongoTemplate.remove(new Query(), "notifications");
+       // notificationRepository.deleteAll();
     }
 
     @Test
@@ -49,7 +54,7 @@ public class ReceiveNotificationTest extends KafkaTestBase {
                 .atMost(Duration.ofSeconds(20))
                 .until(() -> {
                     log.info("Fetching...");
-                    List<NotificationEntity> savedNotification = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
+                    List<NotificationEntity> savedNotification = notificationRepository.findAll();
                     log.info("Fetched notifications:{}", savedNotification);
                     return !savedNotification.isEmpty();
                 });

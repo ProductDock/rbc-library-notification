@@ -5,6 +5,7 @@ import com.productdock.library.notification.adapter.out.mongo.enitity.ActionEnti
 import com.productdock.library.notification.adapter.out.mongo.enitity.NotificationEntity;
 import com.productdock.library.notification.application.port.in.GetNotificationsQuery;
 import com.productdock.library.notification.domain.Notification;
+import com.productdock.library.notification.integration.kafka.KafkaTestBase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,9 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-@Slf4j
-class GetNotificationApiTest {
+class GetNotificationApiTest extends KafkaTestBase {
 
     public static final String USER_ID = "userEmail";
 

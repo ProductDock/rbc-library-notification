@@ -24,7 +24,7 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "${spring.kafka.topic.notifications}")
     public synchronized void listenNotifications(ConsumerRecord<String, String> message) throws JsonProcessingException {
-        log.debug("Received notification kafka message: {}", message);
+        log.info("Received notification kafka message: {}", message);
 
         var notificationMessage = objectMapper.readValue(message.value(), NotificationMessage.class);
         var notification = notificationMapper.toDomain(notificationMessage);

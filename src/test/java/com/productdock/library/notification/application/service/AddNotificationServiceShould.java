@@ -12,7 +12,7 @@ import static com.productdock.library.notification.data.provider.domain.Notifica
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class AddNotificationServiceShould {
+class AddNotificationServiceShould {
 
     private static final Notification NOTIFICATION = notification();
 

@@ -11,12 +11,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static com.productdock.library.notification.data.provider.domain.NotificationMother.notification;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class ReadNotificationServiceShould {
+class ReadNotificationServiceShould {
 
     private static final String USER_ID = "1";
-    private static final Notification NOTIFICATION = notification();
 
     @InjectMocks
     private ReadNotificationsService readNotificationsService;
@@ -25,11 +26,8 @@ public class ReadNotificationServiceShould {
 
     @Test
     void markNotificationAsRead(){
-        var notifications = new ArrayList<Notification>();
-        notifications.add(NOTIFICATION);
-
         readNotificationsService.markAsReadNotifications(USER_ID);
 
-        notificationPersistenceOutPort.saveAll(notifications);
+        verify(notificationPersistenceOutPort).saveAll(any());
     }
 }

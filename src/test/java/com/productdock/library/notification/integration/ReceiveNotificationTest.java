@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.Duration;
 import java.util.List;
@@ -23,6 +24,7 @@ import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 @SpringBootTest
 @Slf4j
+@DirtiesContext
 public class ReceiveNotificationTest extends KafkaTestBase {
 
     public static final NotificationMessage NOTIFICATION_MESSAGE = notificationMessage();

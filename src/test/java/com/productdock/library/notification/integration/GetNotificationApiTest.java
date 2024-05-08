@@ -6,6 +6,7 @@ import com.productdock.library.notification.adapter.out.mongo.enitity.Notificati
 import com.productdock.library.notification.application.port.in.GetNotificationsQuery;
 import com.productdock.library.notification.domain.Notification;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ class GetNotificationApiTest {
     private NotificationRepository notificationRepository;
 
     @BeforeEach
+    @AfterEach
     void before() {
         notificationRepository.deleteAll();
     }

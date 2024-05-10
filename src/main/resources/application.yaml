@@ -1,8 +1,44 @@
+spring:
+  kafka:
+    enabled: true
+    bootstrap-servers: ${KAFKA_SERVER_URL}
+    value-seriliazer: org.apache.kafka.common.serialization.StringSerializer
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer:
+      client-id: kafka-message-producer
+      acks: all
+      value-seriliazer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+      group-id: notifications-group
+    topic:
+      notifications: notifications
+
+  data:
+    mongodb:
+      authentication-database: notification
+      host: ${MONGO_SERVER_URL}
+      port: ${MONGO_SERVER_PORT}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+      database: notification
+
+logging:
+  level:
+    com.productdock.library.notification: INFO
+
+file-logging-enabled: ${LOG_TO_FILE}
+
+jwt:
+  public.key: file:${USER_PROFILES_JWT_PUBLIC_KEY}
+
 server:
-  port: 8080
+  port: 8086
 management:
   server:
-    port: 8087
+    port: 8099
   endpoint:
     health:
       show-details: always

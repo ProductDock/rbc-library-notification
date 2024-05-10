@@ -44,18 +44,18 @@ public class ReceiveNotificationTest extends KafkaTestBase {
     @Test
     void shouldSaveNotification_whenMessageReceived() throws Exception {
         producer.sendNotificationMessage(topic, NOTIFICATION_MESSAGE);
-//
-//        await()
-//                .atMost(Duration.ofSeconds(20))
-//                .until(() -> {
-//                    log.info("Fetching...");
-//                    var savedNotification = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
-//                    log.info("Fetched notifications:{}", savedNotification);
-//                    return !savedNotification.isEmpty();
-//                });
-//
-//       log.warn("{}", notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId));
-//       var notifications = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
-//       assertThat(notifications).isNotEmpty();
+
+        await()
+                .atMost(Duration.ofSeconds(20))
+                .until(() -> {
+                    log.info("Fetching...");
+                    var savedNotification = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
+                    log.info("Fetched notifications:{}", savedNotification);
+                    return !savedNotification.isEmpty();
+                });
+
+       log.warn("{}", notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId));
+       var notifications = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
+       assertThat(notifications).isNotEmpty();
     }
 }

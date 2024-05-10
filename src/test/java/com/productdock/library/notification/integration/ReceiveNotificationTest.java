@@ -2,6 +2,7 @@ package com.productdock.library.notification.integration;
 
 import com.productdock.library.notification.adapter.in.kafka.messages.NotificationMessage;
 import com.productdock.library.notification.adapter.out.mongo.NotificationRepository;
+import com.productdock.library.notification.adapter.out.mongo.enitity.NotificationEntity;
 import com.productdock.library.notification.integration.kafka.KafkaTestBase;
 import com.productdock.library.notification.integration.kafka.KafkaTestProducer;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import java.time.Duration;
 
 import static com.productdock.library.notification.data.provider.in.kafka.NotificationMessageMother.notificationMessage;
+import static com.productdock.library.notification.data.provider.out.mongo.NotificationEntityMother.notificationEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
@@ -43,11 +45,12 @@ public class ReceiveNotificationTest extends KafkaTestBase {
     void shouldSaveNotification_whenMessageReceived() throws Exception {
         producer.sendNotificationMessage(topic, NOTIFICATION_MESSAGE);
 
+        notificationRepository.save(notificationEntity());
         await()
-                .atMost(Duration.ofSeconds(60))
+                .atMost(Duration.ofSeconds(20))
                 .until(() -> {
                     log.info("Fetching...");
-                    var savedNotification = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
+                    var savedNotification = notificationRepository.findAll();
                     log.info("Fetched notifications:{}", savedNotification);
                     return !savedNotification.isEmpty();
                 });

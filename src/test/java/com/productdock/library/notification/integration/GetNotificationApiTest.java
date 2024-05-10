@@ -1,17 +1,12 @@
 package com.productdock.library.notification.integration;
 
 import com.productdock.library.notification.adapter.out.mongo.NotificationRepository;
-import com.productdock.library.notification.adapter.out.mongo.enitity.ActionEntity;
 import com.productdock.library.notification.adapter.out.mongo.enitity.NotificationEntity;
-import com.productdock.library.notification.application.port.in.GetNotificationsQuery;
-import com.productdock.library.notification.domain.Notification;
 import com.productdock.library.notification.integration.kafka.KafkaTestBase;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,7 +17,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GetNotificationApiTest extends KafkaTestBase {
 
     public static final String USER_ID = "userEmail";

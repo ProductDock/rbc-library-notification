@@ -21,7 +21,6 @@ public class NotificationEntityMother {
 
     public static NotificationEntity.NotificationEntityBuilder notificationBuilder(){
         return NotificationEntity.builder()
-                .id(defaultId)
                 .userId(defaultUserId)
                 .title(defaultTitle)
                 .read(false)

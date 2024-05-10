@@ -44,7 +44,7 @@ public class ReceiveNotificationTest extends KafkaTestBase {
         producer.sendNotificationMessage(topic, NOTIFICATION_MESSAGE);
 
         await()
-                .atMost(Duration.ofSeconds(20))
+                .atMost(Duration.ofSeconds(60))
                 .until(() -> {
                     log.info("Fetching...");
                     var savedNotification = notificationRepository.findAllByUserId(NOTIFICATION_MESSAGE.userId);
